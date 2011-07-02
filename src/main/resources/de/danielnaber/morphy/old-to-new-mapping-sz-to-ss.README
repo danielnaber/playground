@@ -1,0 +1,4 @@
+
+um die ß -> ss Ersetzungen in eine Mapping-Datei zu bekommen:
+
+sed -e 's/\(.*\)/\1\t\1/' fehlt-in-morphy.txt | awk '{print gensub("ss", "ß", "G", $1) "\t" "ß" "\t" "ss" }'
