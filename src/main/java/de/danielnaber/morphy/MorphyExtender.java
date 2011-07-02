@@ -19,12 +19,14 @@ public class MorphyExtender {
         final Map<String, StringReplacement> oldToNew = getMapping(mappingFile);
         final Scanner scanner = new Scanner(morphyFile);
         try {
+            int count = 0;
             String wordForm = null;
             final List<String> inflections = new ArrayList<String>();
             while (scanner.hasNextLine()) {
                 final String line = scanner.nextLine();
                 if (line.startsWith("<form>")) {
                     if (wordForm != null && oldToNew.containsKey(wordForm)) {
+                        count++;
                         final StringReplacement replacement = oldToNew.get(wordForm);
                         final String newForm = replace(wordForm, replacement);
                         System.out.println("<form>" + newForm + "</form>");
@@ -42,6 +44,7 @@ public class MorphyExtender {
                     throw new RuntimeException("Unknown line format: " + line);
                 }
             }
+            System.err.println("Forms from input file: " + oldToNew.size() + ", forms found in Morphy file: " + count);
         } finally {
             scanner.close();
         }
@@ -53,6 +56,9 @@ public class MorphyExtender {
         try {
             while (scanner.hasNextLine()) {
                 final String line = scanner.nextLine();
+                if (line.startsWith("#")) {
+                    continue;
+                }
                 final String[] parts = line.split("\t");
                 if (parts.length != 3) {
                     throw new RuntimeException("Unexpected format: " + line);
