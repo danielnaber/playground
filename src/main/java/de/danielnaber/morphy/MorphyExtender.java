@@ -41,7 +41,7 @@ public class MorphyExtender {
                 } else if (line.startsWith("#")) {
                     // ignore
                 } else {
-                    throw new RuntimeException("Unknown line format: " + line);
+                    System.err.println("Warning: unknown line format: " + line);
                 }
             }
             System.err.println("Forms from input file: " + oldToNew.size() + ", forms found in Morphy file: " + count);
