@@ -22,7 +22,7 @@ import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.text.sentenceiterator.LineSentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
-import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.EndingPreProcessor;
+import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 
@@ -36,12 +36,14 @@ class Indexer {
     SentenceIterator iter = new LineSentenceIterator(inputFile);
     iter.setPreProcessor(String::toLowerCase);
 
-    EndingPreProcessor preProcessor = new EndingPreProcessor();
+    //EndingPreProcessor preProcessor = new EndingPreProcessor();  //useful only for English
     TokenizerFactory tokenizer = new DefaultTokenizerFactory();
-    tokenizer.setTokenPreProcessor(token -> {
-      String base = preProcessor.preProcess(token.toLowerCase());
+    tokenizer.setTokenPreProcessor(new CommonPreprocessor());
+    /*tokenizer.setTokenPreProcessor(token -> {
+      //String base = preProcessor.preProcess(token.toLowerCase());
+      String base = token.toLowerCase();
       return base.replaceAll("\\d", "d");
-    });
+    });*/
 
     int batchSize = 1000;
     int iterations = 15;

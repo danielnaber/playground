@@ -42,7 +42,9 @@ class ManualEval {
 
     List<String> words = Arrays.asList(
             "berlin", "münchen", "gütersloh", "linux", "open source", "wikipedia", "tisch", "fahrrad", "handtuch",
-            "essen", "traktor", "bauernhof", "landwirt", "kryptographie");
+            "essen", "traktor", "bauernhof", "landwirt", "kryptographie",
+            "gehen", "trinken", "laufen", "rennen", "denken",
+            "schön", "jung", "alt", "klug", "wichtig");
     for (String word : words) {
       Collection<String> similar = vec.wordsNearest(word, 10);
       System.out.println("Similar words to '" + word + "' : " + similar);
