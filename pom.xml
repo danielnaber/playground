@@ -66,6 +66,18 @@
             <artifactId>commons-math3</artifactId>
             <version>3.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.encog</groupId>
+            <artifactId>encog-core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.wikidata.wdtk</groupId>
+            <artifactId>wdtk-wikibaseapi</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        -->
     </dependencies>
 
 </project>
